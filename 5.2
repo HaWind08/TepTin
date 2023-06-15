@@ -1,0 +1,36 @@
+#include<iostream>
+#include<fstream>
+
+using namespace std;
+
+int main()
+{
+	char S[100];
+	ifstream f1("FILE1.txt", ios::in);
+	ifstream f2("FILE2.txt", ios::in);
+	ofstream f3("FILE3.txt", ios::out);
+	while(!f1.eof()) // gan file1 vao file 3 
+	{
+		f1.getline(S,100);
+		f3 << S << endl;
+	}
+	while(!f2.eof()) // gan file 2 vao file 3
+	{
+		f2.getline(S,100);
+		f3 << S << endl;
+	}
+	
+	f1.close();
+	f2.close();
+	f3.close();
+	
+	ifstream f3Read("FILE3.txt",ios::in); // doc file 3
+	while(!f3Read.eof())
+	{
+		f3Read.getline(S,100);
+		cout << S << endl;
+	}
+	
+	f3Read.close();	
+	return 0;
+}
