@@ -1,0 +1,17 @@
+#include<iostream>
+#include<fstream>
+
+using namespace std;
+
+int main()
+{
+	int n; char S[100];
+	ifstream f("FISTFILE.txt", ios::in);
+	while(!f.eof())
+	{
+		f.getline(S, 100);
+		cout << S << endl;
+	}
+	f.close();
+	return 0;
+}
