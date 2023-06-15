@@ -1,0 +1,87 @@
+#include<iostream>
+#include<fstream>
+
+using namespace std;
+
+void nhap(int **a, int n, int m)
+{
+	for(int i = 0; i < n;i++)
+	{
+		for(int j = 0;j < m;j++)
+		{
+			cin >> *(*(a + i)+ j);
+		}
+	}
+}
+
+void xuat(int **a, int n, int m)
+{
+	for(int i = 0; i < n;i++)
+	{
+		for(int j = 0;j < m;j++)
+		{
+			cout << *(*(a + i) + j) << " ";
+		}
+		cout << endl;
+	}
+}
+
+void xuatfile(int **a,int n, int m)
+{
+	// mo file can ghi
+	ofstream f("MATRIX.txt",ios::out);
+	f << n  << " "<< m << endl;
+	
+	for(int i = 0; i < n;i++)
+	{
+		for(int j = 0;j < m;j++)
+		{
+			f << *(*(a + i) + j) << " ";
+		}
+		f << endl;
+	}
+	f.close();
+}
+
+void docfile(int **a, int n, int m)
+{
+	// mo tep can doc
+	ifstream f("MATRIX.txt", ios::in); 
+	
+	char S[100];
+	while(!f.eof())
+	{
+		f.getline(S,100);
+		cout << S << endl;
+	}
+}
+
+int main()
+{
+	int **a;
+	int n,m;
+	cout << "Nhap n dong: "; cin >> n;
+	cout << "Nhap m cot: "; cin >> m;
+	
+	a = new int*[n];
+	for(int i = 0; i < n;i++)
+	{
+		a[i] = new int[m];
+	}
+	cout << "Nhap mang: " << endl;
+	nhap(a,n,m);
+	cout << "Mang vua nhap: " <<endl;
+	xuat(a,n,m);
+	
+	cout << "Du lieu doc tu file MATRIX" <<endl;
+	xuatfile(a,n,m);
+	docfile(a,n,m);
+	
+	for(int i = 0; i < n;i++)
+	{
+		delete[] a;
+	}
+	delete[] a;
+	return 0;
+	
+}
