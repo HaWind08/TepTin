@@ -1,0 +1,77 @@
+#include<iostream>
+#include<fstream>
+
+using namespace std;
+
+void nhap(float *a, int n)
+{
+	for(int i = 0;i < n;i++)
+	{
+		cout << "a[" << i << "]= ";
+		cin >> *(a + i);
+	}
+}
+
+void xuat(float *a, int n)
+{
+	for(int i = 0;i < n;i++)
+	{
+		cout << *(a + i) << " ";
+	}
+	cout << endl;
+}
+
+void xuatfile(float *a, int n)
+{
+	ofstream f("DATHUC.txt", ios::out); // mo file can ghi
+	f << n << endl; // kich thuoc cua mang
+	
+	for(int i = 0; i < n; i++)
+	{
+		f << *(a + i) << " ";
+	}
+	f << endl;
+	
+	f << a[0] << "x0";
+	for(int i = 1;i < n; i++)
+	{
+		f << " + "  << a[i] << "x" <<i;
+	}
+	f << endl;
+	
+	f.close();
+}
+
+void docfile(float *a, int n)
+{
+	ifstream f("DATHUC.txt", ios::in);
+	char S[100];
+	while(!f.eof())
+	{
+		f.getline(S,100);
+		cout << S << endl;
+	}
+	f.close();
+}
+
+int main()
+{
+	float *a;
+	int n;
+	
+	cout << "Nhap n: "; cin >> n;
+	
+	a = new float[n];
+	cout << "Nhap mang: " << endl;
+	nhap(a,n);
+	
+	cout << "Mang vua nhap: " <<endl;
+	xuat(a,n);
+	
+	cout << "Du lieu doc tu file DATHUC: " << endl;
+	xuatfile(a,n);
+	docfile(a,n);
+	
+	delete[] a;
+	return 0;
+}
